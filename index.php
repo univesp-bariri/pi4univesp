@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Dados Diários</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.php">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -10,31 +10,38 @@
 
 </head>
 <body>
-    <form method="GET" action="">
-        <label for="local">Local:</label>
-        <select name="local" id="local">
-            <option value="">Selecione um local</option>
-            <?php
-            $db_host = getenv('DB_HOST');
-            $db_name = getenv('DB_NAME');
-            $db_user = getenv('DB_USER');
-            $db_pass = getenv('DB_PASS');
-            $dbconn = pg_connect("host=$db_host dbname=$db_name user=$db_user password=$db_pass") or die('Não foi possível conectar: ' . pg_last_error());
-            $query = "SELECT DISTINCT station_name FROM beach_weather_stations ORDER BY station_name ASC";
-            $result = pg_query($query) or die('A consulta falhou: ' . pg_last_error());
-            while ($row = pg_fetch_assoc($result)) {
-                echo "<option value=\"" . $row['station_name'] . "\">" . $row['station_name'] . "</option>";
-            }
-            pg_free_result($result);
-            pg_close($dbconn);
-            ?>
-        </select>
-        
-        <label for="datepicker">Data:</label>
-        <input type="text" name="date" id="datepicker" autocomplete="off" placeholder="Escolha a data">
 
-        <button type="submit" name="search" id='search'>Buscar</button>
-    </form>
+  <div class="cover">
+    <img src="img/chicago.svg" alt="Logo">
+    <p id="cover-h2">Beach Data Set</p>
+    <div class="wrap">
+      <form method="GET" action="">
+        <div class="search">
+          <select name="local" id="local" class="select" value="<?php echo $_POST['station_name']; ?>">
+              <option value="">Selecione um local</option>
+              <?php
+              $db_host = getenv('DB_HOST');
+              $db_name = getenv('DB_NAME');
+              $db_user = getenv('DB_USER');
+              $db_pass = getenv('DB_PASS');
+              $dbconn = pg_connect("host=$db_host dbname=$db_name user=$db_user password=$db_pass") or die('Não foi possível conectar: ' . pg_last_error());
+              $query = "SELECT DISTINCT station_name FROM beach_weather_stations ORDER BY station_name DESC";
+              $result = pg_query($query) or die('A consulta falhou: ' . pg_last_error());
+              while ($row = pg_fetch_assoc($result)) {
+                  echo "<option value=\"" . $row['station_name'] . "\">" . $row['station_name'] . "</option>";
+              }
+              pg_free_result($result);
+              pg_close($dbconn);
+              ?>
+          </select>
+          
+          <input type="text" name="date" class="searchTerm" id="datepicker" autocomplete="off" placeholder="Escolha a data">
+
+          <button type="submit" name="search" class="searchButton" id='search'>Buscar</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
 <!------------------------------------------------------------------>
 <!-------------------- Temperatura do Ar e Bulbo ------------------->
@@ -74,7 +81,7 @@
                     ) AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
                 } elseif(!empty($date)) {
                     // consulta por data
-                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,air_temperature,wet_bulb_temperature, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
+                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,air_temperature,wet_bulb_temperature, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE station_name = 'Oak Street Weather Station' AND date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
                 } else {
                     // consulta sem filtro
                     $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,air_temperature,wet_bulb_temperature, station_name,to_char(measurement_timestamp, 'HH24h') AS hour FROM beach_weather_stations WHERE measurement_timestamp::date = (
@@ -155,11 +162,11 @@
                     $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,humidity, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE station_name = '$local' AND measurement_timestamp::date = (
                       SELECT COALESCE(MAX(measurement_timestamp::date), CURRENT_DATE - INTERVAL '1 DAY')
                       FROM beach_weather_stations
-                      WHERE station_name = 'Oak Street Weather Station'
+                      WHERE station_name = '$local'
                     ) AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
                 } elseif(!empty($date)) {
                     // consulta por data
-                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,humidity, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
+                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,humidity, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE station_name = 'Oak Street Weather Station' AND date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
                 } else {
                     // consulta sem filtro
                     $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,humidity, station_name,to_char(measurement_timestamp, 'HH24h') AS hour FROM beach_weather_stations WHERE measurement_timestamp::date = (
@@ -188,7 +195,7 @@
     ]);
     var options = {
       title : 'Umidade do ar',
-      vAxis: {title: 'Porcentagem (%)'},
+      vAxis: {title: 'Umidade do ar (%)'},
       hAxis: {title: 'Horário'},
       seriesType: 'scatter',
 
@@ -240,7 +247,7 @@
                     ) AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
                 } elseif(!empty($date)) {
                     // consulta por data
-                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,rain_intensity, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
+                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,rain_intensity, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE station_name = 'Oak Street Weather Station' AND date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
                 } else {
                     // consulta sem filtro
                     $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,rain_intensity, station_name,to_char(measurement_timestamp, 'HH24h') AS hour FROM beach_weather_stations WHERE measurement_timestamp::date = (
@@ -271,7 +278,7 @@
     ]);
     var options = {
       title : 'Intensidade da Chuva',
-      vAxis: {title: 'Unidade (mm)'},
+      vAxis: {title: 'Intensidade da Chuva (mm)'},
       hAxis: {title: 'Horário'},
       curveType: 'function'
     };
@@ -324,7 +331,7 @@
                     ) AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
                 } elseif(!empty($date)) {
                     // consulta por data
-                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,total_rain, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
+                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,total_rain, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE station_name = 'Oak Street Weather Station' AND date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
                 } else {
                     // consulta sem filtro
                     $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,total_rain, station_name,to_char(measurement_timestamp, 'HH24h') AS hour FROM beach_weather_stations WHERE measurement_timestamp::date = (
@@ -355,7 +362,7 @@
     ]);
     var options = {
       title : 'Total de Chuva',
-      vAxis: {title: 'Unidade (mm)'},
+      vAxis: {title: 'Total de Chuva (mm)'},
       hAxis: {title: 'Horário'},
       curveType: 'function'
     };
@@ -410,7 +417,7 @@
                     ) AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY hour";
                 } elseif(!empty($date)) {
                     // consulta por data
-                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,wind_direction, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY hour";
+                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,wind_direction, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE station_name = 'Oak Street Weather Station' AND date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY hour";
                 } else {
                     // consulta sem filtro
                     $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,wind_direction, station_name,to_char(measurement_timestamp, 'HH24h') AS hour FROM beach_weather_stations WHERE measurement_timestamp::date = (
@@ -432,7 +439,7 @@
                     $hour = substr($measurement_timestamp, 0, -1);
                     $timestamps[] = $hour;
 
-                    echo "['$wind_direction º', $hour, $wind_direction],";
+                    echo "['$wind_direction °', $hour, $wind_direction],";
 
                 };
             } else {
@@ -501,7 +508,7 @@
                     ) AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
                 } elseif(!empty($date)) {
                     // consulta por data
-                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,wind_speed,maximum_wind_speed, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
+                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,wind_speed,maximum_wind_speed, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE station_name = 'Oak Street Weather Station' AND date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
                 } else {
                     // consulta sem filtro
                     $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,wind_speed,maximum_wind_speed, station_name,to_char(measurement_timestamp, 'HH24h') AS hour FROM beach_weather_stations WHERE measurement_timestamp::date = (
@@ -533,7 +540,7 @@
     ]);
     var options = {
       title : 'Velocidade do Vento e Máxima Velocidade do Vento',
-      vAxis: {title: 'Unidades (m/s)'},
+      vAxis: {title: 'Velocidade (m/s)'},
       hAxis: {title: 'Horário'},
       seriesType: 'bars',
       series: {5: {type: 'line'}}
@@ -587,7 +594,7 @@
                     ) AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
                 } elseif(!empty($date)) {
                     // consulta por data
-                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,barometric_pressure, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
+                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,barometric_pressure, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE station_name = 'Oak Street Weather Station' AND date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
                 } else {
                     // consulta sem filtro
                     $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,barometric_pressure, station_name,to_char(measurement_timestamp, 'HH24h') AS hour FROM beach_weather_stations WHERE measurement_timestamp::date = (
@@ -618,7 +625,7 @@
     ]);
     var options = {
       title : 'Pressão Atmosférica',
-      vAxis: {title: 'Unidade (hPa)'},
+      vAxis: {title: 'Pressão (hPa)'},
       hAxis: {title: 'Horário'},
       seriesType: 'bars',
       series: {5: {type: 'line'}}
@@ -675,7 +682,7 @@
                     ) AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
                 } elseif(!empty($date)) {
                     // consulta por data
-                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,solar_radiation, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
+                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,solar_radiation, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE station_name = 'Oak Street Weather Station' AND date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
                 } else {
                     // consulta sem filtro
                     $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,solar_radiation, station_name,to_char(measurement_timestamp, 'HH24h') AS hour FROM beach_weather_stations WHERE measurement_timestamp::date = (
@@ -733,7 +740,7 @@
     // Some raw data (not necessarily accurate)
     var data = google.visualization.arrayToDataTable([
     
-      ['Bateria dos Sensores', 'Hora'],
+      ['Bateria dos Sensores', 'Nível da Bateria %'],
 
       <?php
         if(isset($_GET['search'])) {
@@ -760,7 +767,7 @@
                     ) AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
                 } elseif(!empty($date)) {
                     // consulta por data
-                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,battery_life, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
+                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,battery_life, station_name,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE station_name = 'Oak Street Weather Station' AND date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp";
                 } else {
                     // consulta sem filtro
                     $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,battery_life, station_name,to_char(measurement_timestamp, 'HH24h') AS hour FROM beach_weather_stations WHERE measurement_timestamp::date = (
@@ -779,10 +786,7 @@
                     $measurement_timestamp = $row['hour'];
                     $measurement_timestamp_date = $row['date'];
                     $battery_life = $row['battery_life'] ?? 0;
-                    $hour = substr($measurement_timestamp, 0, -1);
-                    $timestamps[] = $hour;
-
-                      echo "[$battery_life , $hour],";
+                    echo "['$measurement_timestamp' , $battery_life],";
                 };
             } else {
             echo "<p>Nenhum dado encontrado para o local e dia selecionados.</p>";
@@ -792,15 +796,15 @@
         }
       ?>
     ]);
-    var timestamps = <?php echo json_encode($timestamps); ?>; 
     var options = {
       title : 'Bateria dos Sensores',
       vAxis: {title: 'Bateria (%)'},
-        hAxis: { title: 'Horário', ticks: timestamps},
-      legend: { position: 'none' },
+      hAxis: {title: 'Horário'},
+      seriesType: 'bars',
+      series: {5: {type: 'line'}}
     };
 
-    var chart = new google.visualization.Histogram(document.getElementById('batteryChart'));
+    var chart = new google.visualization.ColumnChart(document.getElementById('batteryChart'));
     chart.draw(data, options);
 
   }
@@ -833,8 +837,9 @@
 <script>
     if (window.location.href.endsWith("index.php")) {
     // Simulate button click
-        
-        document.getElementById('search').click();
+        var selectElement = document.getElementById('local');
+        selectElement.selectedIndex = 1;
+        //document.getElementById('search').click();
         //var urlPath = window.location.pathname;
         // Set flag to prevent further clicks
     } 
