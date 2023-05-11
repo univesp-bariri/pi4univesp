@@ -259,7 +259,7 @@ a:focus {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
-    background: linear-gradient(to right, rgb(195 38 38 / 57%) 0%, rgb(255 42 42 / 53%) 26%, #7e4545 100%), url(../img/intro-bg.jpg) no-repeat center scroll;
+    background: linear-gradient(to right, rgb(195 38 38 / 57%) 0%, rgb(255 42 42 / 53%) 26%, #7e4545 100%), url(../img/contact-bg.jpg) no-repeat top scroll;
 }
 
 
@@ -813,9 +813,7 @@ img {
         padding: 0;
     }
 
-    
     .p-title {
-        margin-bottom: 30px;
         width: 470px;
         display: inline-table;
     }
@@ -1025,7 +1023,8 @@ table {
 .p-title-contact {
     width: 468px;
     display: inline-table;
-    margin: 0;;
+    margin: 0;
+    font-size: 18px;
 }
 
 .form {
@@ -1035,3 +1034,35 @@ table {
 .h2-padding{
     padding-right: 15px;
 }
+
+#float-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(to right, rgb(141 58 84) 0%, rgb(161 78 101) 26%, #93454a 100%);
+    color: #fff;
+    border-radius: 40px;
+    border: 1px solid #efe6e6;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    box-shadow: 0 0 0px 2px #b33f3f33;
+    z-index: 9999;
+    text-decoration: none;
+  }
+
+  #float-button:hover {
+    background: linear-gradient(to right, rgb(173 86 86) 0%, rgb(199 63 63) 26%, #c95050 100%);
+  }
+  
+  #p-title {
+    width: 34em;
+    margin: 0 auto 30px auto;
+  }
+
+  .pin {
+    display: inline-table;
+    width: 40em;
+    font-size: 18px;
+    margin: 0 0 10px 0;
+  }

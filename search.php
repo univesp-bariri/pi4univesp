@@ -46,7 +46,7 @@ $date = $_GET['date'];
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="#page-top">
+                <a class="navbar-brand" href="index.php#page-top">
                     <img src="img/chicago-nav.svg" alt="Logo">
                 </a>
             </div>
@@ -190,6 +190,7 @@ $date = $_GET['date'];
                                 ]);
                                 var options = {
                                 title : 'Temperatura do ar',
+                                titleTextStyle: {fontSize: 16, textAlign: 'center', color: '#383838'},
                                 vAxis: {title: 'Temperatura (°C)'},
                                 hAxis: {title: 'Horário'},
                                 seriesType: 'bars',
@@ -275,6 +276,7 @@ $date = $_GET['date'];
                                 ]);
                                 var options = {
                                 title : 'Umidade do ar',
+                                titleTextStyle: {fontSize: 16, textAlign: 'center', color: '#383838'},
                                 vAxis: {title: 'Umidade do ar (%)'},
                                 hAxis: {title: 'Horário'},
                                 seriesType: 'scatter',
@@ -363,6 +365,7 @@ $date = $_GET['date'];
                                 ]);
                                 var options = {
                                 title : 'Intensidade da Chuva',
+                                titleTextStyle: {fontSize: 16, textAlign: 'center', color: '#383838'},
                                 vAxis: {title: 'Intensidade da Chuva (mm)'},
                                 hAxis: {title: 'Horário'},
                                 curveType: 'function',
@@ -451,6 +454,7 @@ $date = $_GET['date'];
                                 ]);
                                 var options = {
                                 title : 'Total de Chuva',
+                                titleTextStyle: {fontSize: 16, textAlign: 'center', color: '#383838'},
                                 vAxis: {title: 'Total de Chuva (mm)'},
                                 hAxis: {title: 'Horário'},
                                 curveType: 'function',
@@ -547,6 +551,7 @@ $date = $_GET['date'];
                                 var timestamps = <?php echo json_encode($timestamps); ?>; 
                                 var options = {
                                 title : 'Direção do Vento',
+                                titleTextStyle: {fontSize: 16, textAlign: 'center', color: '#383838'},
                                 vAxis: {title: 'Graus (°)'},
                                 hAxis: { title: 'Horário', ticks: timestamps},
                                 format: 'h',
@@ -639,6 +644,7 @@ $date = $_GET['date'];
                                 ]);
                                 var options = {
                                 title : 'Velocidade do Vento e Máxima Velocidade do Vento',
+                                titleTextStyle: {fontSize: 16, textAlign: 'center', color: '#383838'},
                                 vAxis: {title: 'Velocidade (m/s)'},
                                 hAxis: {title: 'Horário'},
                                 seriesType: 'bars',
@@ -729,6 +735,7 @@ $date = $_GET['date'];
                                 ]);
                                 var options = {
                                 title : 'Pressão Atmosférica',
+                                titleTextStyle: {fontSize: 16, textAlign: 'center', color: '#383838'},
                                 vAxis: {title: 'Pressão (hPa)'},
                                 hAxis: {title: 'Horário'},
                                 seriesType: 'bars',
@@ -818,6 +825,7 @@ $date = $_GET['date'];
                                 ]);
                                 var options = {
                                 title : 'Radiação Solar',
+                                titleTextStyle: {fontSize: 16, textAlign: 'center', color: '#383838'},
                                 vAxis: {title: 'Unives (W/m²)'},
                                 hAxis: {title: 'Horário'},
                                 isStacked: true,
@@ -910,6 +918,7 @@ $date = $_GET['date'];
                             ]);
                             var options = {
                             title : 'Bateria dos Sensores',
+                            titleTextStyle: {fontSize: 16, textAlign: 'center', color: '#383838'},
                             vAxis: {title: 'Bateria (%)'},
                             hAxis: {title: 'Horário'},
                             seriesType: 'bars',
@@ -920,13 +929,13 @@ $date = $_GET['date'];
                             chart.draw(data, options);
 
                         }
-
+                        
                         </script>
-                            <div id="batteryChart" class="chart"></div>
+                        <div id="batteryChart" class="chart"></div>
 
 
-                            <!------------------------------------------------------------------>
-                            <!------------------------------------------------------------------>
+                        <!------------------------------------------------------------------>
+                        <!------------------------------------------------------------------>
                         </div>
                     </div>
                 </div>
@@ -948,6 +957,9 @@ $date = $_GET['date'];
             <span class="light">2023 | </span><span>Chicago</span><span class="light"> - Beach Data Set</span>
         </a>
     </footer>
+
+
+    <a href="index.php" id="float-button">Nova Pesquisa</a>
 
 </body>
 </html>

@@ -107,11 +107,11 @@
                     <div class="container">
                         <div class="col-lg-8 col-lg-offset-2">
                             <h2>Sobre nós</h2>
-                            <p class="p-title">Chicago Beach Dat Set é um aplicativo web idealizado pelos alunos do <br> 
-                                Eixo de Computação da UNIVESP, do polo de Bariri, <br>
-                                para a disciplina Projeto Integrador. <br>
-                                Iniciamos esse projeto com o intuito de aproximar pessoas <br>
-                                que são apaixonadas por ciclismo, aventura e turismo.</p>
+                            <p id="p-title" class="p-title"><p class="pin">O Chicago Beach Date Set é um aplicativo web desenvolvido pelos alunos do Eixo de Computação da UNIVESP, polo de Bariri, para a disciplina Projeto Integrador.</p> <br>
+                            <p class="pin"> O site apresenta dados coletados a cada duas horas por sensores automatizados instalados nas praias de Chicago, fornecidos pela prefeitura da cidade. Esses dados incluem informações sobre temperatura, velocidade do vento, umidade e outras variáveis ​​climáticas relevantes para as atividades de lazer e esportes nas praias da cidade. </p><br>
+                            <p class="pin">Com base nesses dados, os usuários podem verificar as condições climáticas nas praias e tomar decisões informadas sobre suas atividades.</p><br>
+                            <p class="pin">O Chicago Beach Date Set é uma ferramenta útil para quem deseja desfrutar das praias de Chicago com segurança e conforto.</p><br>
+                        </p>
                         </div>
                     </div>
                 </div>
@@ -155,7 +155,6 @@
 	    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
 	    } );
     </script>
-
 
 </body>
 </html>
