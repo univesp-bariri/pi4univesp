@@ -648,7 +648,7 @@ $date = $_GET['date'];
                                 ?>
                                 ]);
                                 var options = {
-                                title : 'Velocidade do Vento e Máxima Velocidade do Vento',
+                                title : 'Velocidade do Vento',
                                 titleTextStyle: {fontSize: 16, textAlign: 'center', color: '#383838'},
                                 vAxis: {title: 'Velocidade (m/s)'},
                                 hAxis: {title: 'Horário'},
@@ -928,7 +928,7 @@ $date = $_GET['date'];
                             vAxis: {title: 'Bateria (%)'},
                             hAxis: {title: 'Horário'},
                             seriesType: 'bars',
-                            series: {5: {type: 'line'}}
+                            series: {5: {type: 'line'}},
                             legend: { position: 'top', alignment: 'center' }
                             };
 
