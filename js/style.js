@@ -46,16 +46,12 @@ $(window).resize(function(){
 });
 
 
+
 onload = function(){
     const btnAlert = document.getElementById('btn-send');
-    console.log(btnAlert);
     if (btnAlert) {
-      btnAlert.onclick = function(){
-        swal('Obrigado!', 'Mensagem enviado com sucesso!', 'success');
-        setTimeout(() => {
-          location.reload();
-        }, 2000);
-      };
-    }
-  };
-  
+        btnAlert.onclick = function(){
+            swal('Obrigado!', 'Mensagem enviado com sucesso!', 'success')
+        }};
+};
+
