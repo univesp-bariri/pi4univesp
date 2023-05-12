@@ -10,18 +10,20 @@
 	<link rel="shortcut icon" href="img/favicon.ico">
 	<link rel="stylesheet" href="css/bootstrap.css" type="text/css">
 	<link rel="stylesheet" href="css/font-awesome.css" type="text/css">
-	<link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 
     <script src="js/jquery.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="js/jquery.easing.js"></script>
 	<script src="js/canvas.js"></script>
-	<script src="js/style.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="js/style.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
 
 </head>
@@ -126,15 +128,11 @@
                 <h2 class="h2-padding">Contato</h2>
                 <p class="p-title p-title-contact">Para sugestões ou dúvidas, sinta-se livre para entrar em contato conosco</p>
 
-                <form class="form" action="{{ url_for('send') }}" method="post">      
-                <input name="nome" type="text" class="feedback-input" placeholder="Nome" required>   
-                <input name="email" type="text" class="feedback-input" placeholder="E-mail" required>
-                <textarea name="mensagem" class="feedback-input" placeholder="Mensagem" required></textarea>
-                <button id="btn-send" type="submit">Enviar</button>
-                <button id="btn-send-loader" type="button" disabled>
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    Loading...
-                  </button>
+                <form class="form" method="post">      
+                    <input name="nome" type="text" class="feedback-input" placeholder="Nome" required>   
+                    <input name="email" type="text" class="feedback-input" placeholder="E-mail" required>
+                    <textarea name="mensagem" class="feedback-input" placeholder="Mensagem" required></textarea>
+                    <button id="btn-send" type="submit">Enviar</button>
                 </form>
 
             </div>

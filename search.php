@@ -18,9 +18,9 @@ $date = $_GET['date'];
 	<link rel="shortcut icon" href="img/favicon.ico">
 	<link rel="stylesheet" href="css/bootstrap.css" type="text/css">
 	<link rel="stylesheet" href="css/font-awesome.css" type="text/css">
-	<link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 
     <script src="js/jquery.js"></script>
 	<script src="js/bootstrap.js"></script>
@@ -116,7 +116,7 @@ $date = $_GET['date'];
     <section id="about" class="text-center">
             <div class="about-section about-section-search">
             <?php if(!empty($local) && !empty($date)) { 
-                 echo '<h3 class="h3-search">Lembre-se sempre de verificar as condições climáticas antes de sair de casa. Mantenha-se informado, divirta-se com segurança e aproveite tudo o que as praias de Chicago têm a oferecer!</h3>';
+                 echo '<h3 class="h3-search">Verifique sempre as condições climáticas antes de sair de casa.<br> Mantenha-se informado, divirta-se com segurança e aproveite tudo o que as praias de Chicago têm a oferecer!</h3>';
              } ?>
    
                     <div class="container container-search">
@@ -198,7 +198,8 @@ $date = $_GET['date'];
                                 vAxis: {title: 'Temperatura (°C)'},
                                 hAxis: {title: 'Horário'},
                                 seriesType: 'bars',
-                                series: {5: {type: 'line'}}
+                                series: {5: {type: 'line'}},
+                                legend: { position: 'top', alignment: 'center' }
                                 };
 
                                 var chart = new google.visualization.ComboChart(document.getElementById('tempChart'));
@@ -653,6 +654,7 @@ $date = $_GET['date'];
                                 hAxis: {title: 'Horário'},
                                 seriesType: 'bars',
                                 series: {5: {type: 'line'}}
+                                legend: { position: 'top', alignment: 'center' }
                                 };
 
                                 var chart = new google.visualization.ColumnChart(document.getElementById('windChart'));
@@ -927,6 +929,7 @@ $date = $_GET['date'];
                             hAxis: {title: 'Horário'},
                             seriesType: 'bars',
                             series: {5: {type: 'line'}}
+                            legend: { position: 'top', alignment: 'center' }
                             };
 
                             var chart = new google.visualization.ColumnChart(document.getElementById('batteryChart'));
