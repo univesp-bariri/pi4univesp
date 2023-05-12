@@ -653,7 +653,7 @@ $date = $_GET['date'];
                                 vAxis: {title: 'Velocidade (m/s)'},
                                 hAxis: {title: 'Horário'},
                                 seriesType: 'bars',
-                                series: {5: {type: 'line'}}
+                                series: {5: {type: 'line'}},
                                 legend: { position: 'top', alignment: 'center' }
                                 };
 
