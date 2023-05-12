@@ -81,6 +81,8 @@ a:focus {
     text-transform: uppercase;
     font-weight: bold;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-align: center;
+    background: linear-gradient(to right, rgb(119 38 64) 0%, rgb(132 56 98) 26%, #804246 100%), url(../img/white-bg.jpg) no-repeat scroll;
 }
 
 .navbar-brand {
@@ -824,38 +826,6 @@ img {
 
 }
 
-/* Tiny-Mobile */
-@media screen and (max-width:680px) { 
-    h1, h2 {
-    font-size: 26px;
-    }
-
-    .routes-images {
-        padding: 0;
-        transform: scale(0.9);
-        margin-top: 0;
-        width: auto;
-        margin: 0;
-    }
-
-    .chart {
-        width: 100%; 
-        min-width: 400px;
-        min-height: 450px;
-        font-size: 10px;
-      }
-      .container-search {
-        margin:0 !important;
-      }
-
-      .container-search {
-        display: inline-block;
-      }
-
-
-
-}
-
 body {
     margin: 0;
     font-family: "Work Sans", Arial, sans-serif;
@@ -1062,7 +1032,127 @@ table {
 
   .pin {
     display: inline-table;
-    width: 40em;
+    width: 38em;
     font-size: 18px;
     margin: 0 0 10px 0;
   }
+
+  .h3-search {
+    width: 48%;
+    font-size: 18px;
+    text-transform: unset;
+    margin: 0 auto 20px auto;
+    line-height: 1.3em;
+  }
+
+  .about-section-search {
+    padding: 60px;
+  }
+
+  /* Tiny-Mobile */
+@media screen and (max-width:680px) { 
+    h1, h2 {
+    font-size: 26px;
+    }
+
+    .routes-images {
+        padding: 0;
+        transform: scale(0.9);
+        margin-top: 0;
+        width: auto;
+        margin: 0;
+    }
+
+    .chart {
+        width: 100%; 
+        min-width: 400px;
+        min-height: 450px;
+        font-size: 10px;
+      }
+    .container-search {
+        margin:0 !important;
+      }
+
+    .container-search {
+        display: inline-block;
+      }
+
+    .intro-search, .intro {
+        padding-bottom: 60px;
+      }
+
+    .about-section-search {
+        padding: 0;
+    }
+
+    .about-section {
+        margin-top: 30px;
+    }
+
+    .h3-search {
+        width: 70%;
+    }
+
+    .wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        display: contents;
+        width: 50px;
+    } 
+      .search {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+      }
+      
+      .select,
+      .searchTerm,
+      .searchButton {
+        width: 100%;
+        max-width: 400px;
+        padding: 10px;
+        margin: 0 0 10px 0;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+      }
+
+      .searchButton:hover {
+        background: #edcac2;
+        color: #b33f3f;
+      }
+      
+      form {
+        width: 290px;
+      }
+
+      .col-lg-8 {
+        width: 100%;
+        max-width: 768px; /* largura máxima para dispositivos com largura menor que 768px */
+        margin: 0 auto; /* centralizar o elemento na página */
+    }
+    
+    .p-title {
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    
+    .pin {
+        margin-bottom: 10px;
+    }
+
+    .pin {
+        width: 100%;
+    }
+
+    #p-title {
+        width: 0;
+    }
+
+    .contact-box {
+        margin: 25px auto 0 auto;
+    }
+}

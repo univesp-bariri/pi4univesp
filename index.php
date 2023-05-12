@@ -105,10 +105,10 @@
     <section id="about" class="text-center">
             <div class="about-section">
                     <div class="container">
-                        <div class="col-lg-8 col-lg-offset-2">
+                     <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
                             <h2>Sobre nós</h2>
                             <p id="p-title" class="p-title"><p class="pin">Chicago Beach Data Set é um aplicativo web desenvolvido pelos alunos do Eixo de Computação da UNIVESP, polo de Bariri, para a disciplina Projeto Integrador.</p> <br>
-                            <p class="pin"> O site apresenta dados coletados a cada duas horas por sensores automatizados instalados nas praias de Chicago, fornecidos pela prefeitura da cidade. Esses dados incluem informações sobre temperatura, velocidade do vento, umidade e outras variáveis ​​climáticas relevantes para as atividades de lazer e esportes nas praias da cidade. </p><br>
+                            <p class="pin"> O site apresenta dados coletados por sensores automatizados instalados nas praias de Chicago, fornecidos pela prefeitura da cidade. Esses dados incluem informações sobre temperatura, velocidade do vento, umidade e outras variáveis climáticas relevantes para as atividades de lazer e esportes nas praias da região. </p><br>
                             <p class="pin">Com base nesses dados, os usuários podem verificar as condições climáticas nas praias e tomar decisões informadas sobre suas atividades.</p><br>
                             <p class="pin">Chicago Beach Data Set é uma ferramenta útil para quem deseja desfrutar das praias de Chicago com segurança e conforto.</p><br>
                         </p>
@@ -122,9 +122,9 @@
     <section id="contact" class="text-center">
         <div class="contact-section">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 contact-box">
+        <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 contact-box">
                 <h2 class="h2-padding">Contato</h2>
-                <p class="p-title p-title-contact">Para sugestões, dúvidas ou parceria, sinta-se livre para entrar em contato conosco</p>
+                <p class="p-title p-title-contact">Para sugestões ou dúvidas, sinta-se livre para entrar em contato conosco</p>
 
                 <form class="form" action="{{ url_for('send') }}" method="post">      
                 <input name="nome" type="text" class="feedback-input" placeholder="Nome" required>   

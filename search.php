@@ -85,13 +85,14 @@ $date = $_GET['date'];
                                     $db_pass = getenv('DB_PASS');
                                     $dbconn = pg_connect("host=$db_host dbname=$db_name user=$db_user password=$db_pass") or die('Não foi possível conectar: ' . pg_last_error());
                                     // consulta por local e data
-                                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date FROM beach_weather_stations WHERE station_name = '$local' AND date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp LIMIT 1";
+                                    $query = "SELECT to_char(measurement_timestamp, 'DD/MM/YYYY') as date,to_char(measurement_timestamp, 'HH24h') AS hour  FROM beach_weather_stations WHERE station_name = '$local' AND date(measurement_timestamp) = '$date' AND EXTRACT(HOUR FROM measurement_timestamp)::integer % 2 = 0 ORDER BY measurement_timestamp LIMIT 1";
                                 
                                 $result = pg_query($query) or die('A consulta falhou: ' . pg_last_error());
                                 }
                                 if(pg_num_rows($result) > 0) {
                                     while ($row = pg_fetch_assoc($result)) {
                                         $measurement_timestamp_date = $row['date'];
+                                        $measurement_timestamp_hour = $row['hour'];
                                         echo '<div intro-text>';
                                         echo '<h2 class="cover-h2 h2-search">'. $local . '</h2>';
                                         echo '<hr size="10" width="50%" color="#FFF">';
@@ -113,7 +114,10 @@ $date = $_GET['date'];
    
 
     <section id="about" class="text-center">
-            <div class="about-section">
+            <div class="about-section about-section-search">
+            <?php if(!empty($local) && !empty($date)) { 
+                 echo '<h3 class="h3-search">Lembre-se sempre de verificar as condições climáticas antes de sair de casa. Mantenha-se informado, divirta-se com segurança e aproveite tudo o que as praias de Chicago têm a oferecer!</h3>';
+             } ?>
    
                     <div class="container container-search">
 
