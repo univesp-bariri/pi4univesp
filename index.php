@@ -110,8 +110,8 @@
                      <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
                             <h2>Sobre nós</h2>
                             <p id="p-title" class="p-title"><p class="pin">Chicago Beach Data Set é um aplicativo web desenvolvido pelos alunos do Eixo de Computação da UNIVESP, polo de Bariri, para a disciplina Projeto Integrador.</p> <br>
-                            <p class="pin"> O site apresenta dados coletados por sensores automatizados instalados nas praias de Chicago, fornecidos pela prefeitura da cidade. Esses dados incluem informações sobre temperatura, velocidade do vento, umidade e outras variáveis climáticas relevantes para as atividades de lazer e esportes nas praias da região. </p><br>
-                            <p class="pin">Com base nesses dados, os usuários podem verificar as condições climáticas nas praias e tomar decisões informadas sobre suas atividades.</p><br>
+                            <p class="pin"> O site apresenta dados coletados a cada duas horas por sensores automatizados instalados nas praias de Chicago, fornecidos pela prefeitura da cidade. Esses dados incluem informações sobre temperatura, velocidade do vento, radiação solar, umidade e outras variáveis climáticas relevantes para as atividades de lazer e esportes nas praias da região. </p><br>
+                            <p class="pin">Com base nesses dados, os usuários podem verificar as condições climáticas nas praias e tomar decisões acertadas sobre suas atividades.</p><br>
                             <p class="pin">Chicago Beach Data Set é uma ferramenta útil para quem deseja desfrutar das praias de Chicago com segurança e conforto.</p><br>
                         </p>
                         </div>
